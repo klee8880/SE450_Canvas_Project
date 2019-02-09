@@ -8,6 +8,7 @@ import view.interfaces.PaintCanvasBase;
 public class CommandManager implements ICommandManager{
 	private IApplicationState AppState;
 	private PaintCanvasBase Canvas;
+	private IShapeList selectedShapes;
 
 	public CommandManager(IApplicationState appState, PaintCanvasBase canvas) {
 		super();

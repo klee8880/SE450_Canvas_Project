@@ -1,6 +1,5 @@
 package controller;
 
-import model.Point;
 import model.interfaces.Entity;
 import view.interfaces.PaintCanvasBase;
 
@@ -14,5 +13,7 @@ interface IShapeList {
 	public void moveAll(int x, int y);
 	
 	public void clearObservers();
+	
+	public IShapeList clone();
 	
 }

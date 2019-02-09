@@ -1,8 +1,6 @@
 package model.interfaces;
 
 import java.util.LinkedList;
-import java.util.Queue;
-
 import model.ShapeColor;
 import model.ShapeShadingType;
 import model.ShapeType;

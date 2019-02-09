@@ -2,16 +2,12 @@ package controller.strategies;
 
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
-
 import model.interfaces.Entity;
-import view.interfaces.PaintCanvasBase;
 
 public class rectangleDraw extends ADrawStrategy{
 
 	@Override
-	public void drawShape(Entity shape, PaintCanvasBase canvas) {
-		
-		Graphics2D graphic = canvas.getGraphics2D();
+	public void drawShape(Entity shape, Graphics2D graphic) {
 		
 		int x = shape.getStartPoint().x;
 		int y = shape.getStartPoint().y;

@@ -3,19 +3,12 @@ package controller.strategies;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import model.Point;
-import model.ShapeType;
 import model.interfaces.Entity;
-import view.interfaces.PaintCanvasBase;
 
 public class triangleDraw extends ADrawStrategy{
 
 	@Override
-	public void drawShape(Entity shape, PaintCanvasBase canvas) {
-
-		//Make sure what was passed in is actually a triangle so this doesn't bomb
-		if (shape.getType() != ShapeType.TRIANGLE) {
-			throw new IllegalArgumentException("Entity cannot be drawn as a triangle");
-		}
+	public void drawShape(Entity shape, Graphics2D graphic) {
 		
 		//Set dimensions
 		int height = shape.getHeight();
@@ -36,7 +29,6 @@ public class triangleDraw extends ADrawStrategy{
 		
 		
 		//Draw this shape
-		Graphics2D graphic = canvas.getGraphics2D();
 		
 		switch(shape.getShading()) {
 		

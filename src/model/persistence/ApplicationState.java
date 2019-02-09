@@ -9,10 +9,8 @@ import model.interfaces.Entity;
 import model.interfaces.IApplicationState;
 import model.interfaces.IDialogProvider;
 import view.interfaces.IUiModule;
-
 import java.io.Serializable;
 import java.util.LinkedList;
-import java.util.Queue;
 
 public class ApplicationState implements IApplicationState, Serializable {
     private static final long serialVersionUID = -5545483996576839008L;
