@@ -1,5 +1,5 @@
 package controller;
-//test
+//TEST TEST
 import controller.commands.*;
 import model.Point;
 import model.interfaces.IApplicationState;
