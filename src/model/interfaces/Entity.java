@@ -4,6 +4,7 @@ import java.awt.*;
 import model.Point;
 import model.ResolveColor;
 import model.ShapeColor;
+import model.ShapeShadingType;
 import model.ShapeType;
 import view.interfaces.PaintCanvasBase;
 
@@ -12,6 +13,7 @@ public abstract class Entity {
 	protected Point StartPoint;
 	protected int height;
 	protected int width;
+	protected ShapeShadingType shading;
 	protected boolean fill = false;
 	protected boolean outline = false;
 	protected boolean selected = false;
@@ -159,7 +161,20 @@ public abstract class Entity {
 		this.secondary = ResolveColor.resolve(secondary);
 	}
 	
+	public ShapeType getType() {
+		return type;
+	}
 	
+	
+
+	public ShapeShadingType getShading() {
+		return shading;
+	}
+
+	public void setShading(ShapeShadingType shading) {
+		this.shading = shading;
+	}
+
 	//Abstract
 	public abstract void draw(PaintCanvasBase Canvas);
 	
