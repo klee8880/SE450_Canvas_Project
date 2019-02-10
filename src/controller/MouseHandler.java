@@ -2,28 +2,21 @@ package controller;
 
 
 import java.awt.event.MouseEvent;
-import javax.swing.SwingUtilities;
 import javax.swing.event.MouseInputListener;
-
 import model.interfaces.IApplicationState;
-import view.interfaces.PaintCanvasBase;
-import model.*;
-import model.Shapes.Entity;
-
+import model.Point;
 
 public class MouseHandler implements MouseInputListener {
 
 	private Point begin;
 	private Point end;
 	private IApplicationState App;
-	private PaintCanvasBase Canvas;
 	private ICommandManager Manager;
 	
-	public MouseHandler(IApplicationState App, PaintCanvasBase Canvas, ICommandManager Manager) {
+	public MouseHandler(IApplicationState App, ICommandManager Manager) {
 		begin = new Point();
 		end = new Point();
 		this.App = App;
-		this.Canvas = Canvas;
 		this.Manager = Manager;
 	}
 
@@ -52,8 +45,6 @@ public class MouseHandler implements MouseInputListener {
 		end = recordPoint(e);
 		
 		switch (App.getActiveStartAndEndPointMode()) {
-		case DEBUG:
-			break;
 		case DRAW:
 			Manager.draw(begin, end);
 			break;

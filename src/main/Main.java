@@ -18,7 +18,7 @@ public class Main {
         ICommandManager Manager = new CommandManager(appState, paintCanvas);
         IJPaintController controller = new JPaintController(uiModule, appState, Manager);
         controller.setup();
-        paintCanvas.addMouseListener(new MouseHandler(appState, paintCanvas, Manager));
+        paintCanvas.addMouseListener(new MouseHandler(appState, Manager));
     }
 }
 
