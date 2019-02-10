@@ -1,4 +1,4 @@
-package model.interfaces;
+package model.Shapes;
 
 import java.awt.*;
 import model.Point;
@@ -8,16 +8,13 @@ import model.ShapeShadingType;
 import model.ShapeType;
 import view.interfaces.PaintCanvasBase;
 
-public abstract class Entity {
+public class Entity {
 
 	protected Point StartPoint;
 	protected int height;
 	protected int width;
 	protected ShapeShadingType shading;
-	protected boolean fill = false;
-	protected boolean outline = false;
-	protected boolean selected = false;
-	int group; //Group 0 is the default
+	protected int group; //Group 0 is the default
 	protected ShapeType type;
 	protected Color primary;
 	protected Color secondary;
@@ -40,37 +37,24 @@ public abstract class Entity {
 		group = 0;
 	}
 	
-	protected Entity(IApplicationState AppState, Point begin, int height, int width) {
+	protected Entity(ShapeType type, ShapeShadingType shading, Color primary, Color secondary, Point begin, int height, int width) {
+		
+		this.type = type;
 		
 		this.height = height;
 		this.width = width;
 		this.StartPoint = new Point(begin);
 		
 		//Create Start Point
-		StartPoint = begin;
-		
-		//Set fill type
-		switch(AppState.getActiveShapeShadingType()) {
-		case FILLED_IN:
-			fill = true;
-			break;
-		case OUTLINE:
-			outline = true;
-			break;
-		case OUTLINE_AND_FILLED_IN:
-			fill = true;
-			outline = true;
-			break;
-		default:
-			break;
-		}
+		this.StartPoint = begin;
 		
 		//default group
-		group = 0;
+		this.group = 0;
 		
 		//Set coloring
-		this.primary = ResolveColor.resolve(AppState.getActivePrimaryColor());
-		this.secondary = ResolveColor.resolve(AppState.getActiveSecondaryColor());
+		this.shading = shading;
+		this.primary = primary;
+		this.secondary = secondary;
 		
 	}
 
@@ -78,9 +62,7 @@ public abstract class Entity {
 		this.StartPoint = new Point(old.getStartPoint());
 		this.height = old.height;
 		this.width = old.width;
-		this.fill = old.fill;
-		this.outline = old.outline;
-		this.selected = false;
+		this.shading = old.shading;
 		this.group = 0;
 		this.type = old.type;
 		this.primary = old.primary;
@@ -113,30 +95,6 @@ public abstract class Entity {
 		this.group = group;
 	}
 
-	public boolean isFill() {
-		return fill;
-	}
-
-	public void setFill(boolean fill) {
-		this.fill = fill;
-	}
-
-	public boolean isOutline() {
-		return outline;
-	}
-
-	public void setOutline(boolean outline) {
-		this.outline = outline;
-	}
-
-	public boolean isSelected() {
-		return selected;
-	}
-
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
-
 	public Color getPrimary() {
 		return primary;
 	}
@@ -164,8 +122,6 @@ public abstract class Entity {
 	public ShapeType getType() {
 		return type;
 	}
-	
-	
 
 	public ShapeShadingType getShading() {
 		return shading;
@@ -174,20 +130,15 @@ public abstract class Entity {
 	public void setShading(ShapeShadingType shading) {
 		this.shading = shading;
 	}
-
-	//Abstract
-	public abstract void draw(PaintCanvasBase Canvas);
-	
-	public abstract void selectDraw(Graphics2D graphic);
-	
-	public abstract boolean contains(Point Point);
-	
-	public abstract Entity clone();
 	
 	//Methods
 	public void move(int x, int y) {
 		StartPoint.x = StartPoint.x + x;
 		StartPoint.y = StartPoint.y + y;
+	}
+	
+	public Entity clone() {
+		return new Entity (this);
 	}
 	
 }

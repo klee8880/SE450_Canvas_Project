@@ -1,23 +1,22 @@
 package controller.commands;
 
-import model.interfaces.Entity;
+import controller.IShapeList;
+import model.Shapes.Entity;
 import model.interfaces.IApplicationState;
 import view.interfaces.PaintCanvasBase;
 
 public class UngroupCommand extends GroupCommand{
 
-	public UngroupCommand(IApplicationState appState, PaintCanvasBase Canvas) {
-		super(appState, Canvas);
+	public UngroupCommand(IShapeList shapes, IApplicationState appState) {
+		super(shapes, appState);
 	}
 	
 	@Override
 	public boolean run() {
 		
-		if (super.selectShapes.isEmpty()) {return false;}
+		if (super.shapes.isEmpty()) {return false;}
 		
-		for (Entity i: super.selectShapes) {
-			i.setGroup(0);
-		}
+		shapes.groupAll(0);
 		
 		return true;
 		

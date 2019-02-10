@@ -1,17 +1,19 @@
 package controller.commands;
 import java.util.LinkedList;
+
+import controller.IShapeList;
 import model.Point;
-import model.interfaces.Entity;
+import model.Shapes.Entity;
 import model.interfaces.IApplicationState;
 import view.interfaces.PaintCanvasBase;
 
 public class SelectCommand implements Command{
 	
 	private Point [] selectBoundary; //Boundary points 1-4 clockwise beginning in the top left corner
-	private LinkedList<Entity> Shapes;
+	private IShapeList Shapes, selected;
 	private PaintCanvasBase Canvas;
 
-	public SelectCommand(IApplicationState state, PaintCanvasBase Canvas, Point begin, Point end) {
+	public SelectCommand(IApplicationState state, IShapeList selection, PaintCanvasBase Canvas, Point begin, Point end) {
 		
 		//Set dimensions
 		int height = Math.abs(begin.y - end.y);
@@ -27,26 +29,23 @@ public class SelectCommand implements Command{
 		
 		//Set other properties
 		selectBoundary = getBoundary(StartPoint, height, width);
-		Shapes = state.getShapes();
+		this.Shapes = state.getShapes();
+		this.selected = selection;
 		this.Canvas = Canvas;
 		
 	}
 	
 	@Override
 	public boolean run() {
-		//clear previous selections
-		for (Entity i: Shapes) {
-			i.setSelected(false);
-		}
 		
 		//mark select on all shapes that intersect the bounding box.
-		for (Entity i : Shapes) {
+		for (Entity i : Shapes.getShapes()) {
 			
 			//mark new selections
 			Point [] shapeBoundary = getBoundary(i.getStartPoint(), i.getHeight(), i.getWidth());
 			
 			if (collision(selectBoundary, shapeBoundary)) {
-				i.setSelected(true);
+				selected.add(i);
 				//check and handle if this is a grouped shape
 				if (i.getGroup() > 0) {
 					selectGroup(i.getGroup());
@@ -57,9 +56,7 @@ public class SelectCommand implements Command{
 		//redraw canvas
 		Canvas.paintImmediately(0, 0, Canvas.getWidth(), Canvas.getHeight());
 		
-		for (Entity i: Shapes) {
-			i.draw(Canvas);
-		}
+		Shapes.drawAll(Canvas);
 		
 		return true;
 	}
@@ -142,9 +139,9 @@ public class SelectCommand implements Command{
 	}
 	
 	private void selectGroup (int groupNum) {
-		for (Entity i: Shapes) {
+		for (Entity i: Shapes.getShapes()) {
 			if (i.getGroup() == groupNum) {
-				i.setSelected(true);
+				selected.add(i);
 			}
 		}
 	}

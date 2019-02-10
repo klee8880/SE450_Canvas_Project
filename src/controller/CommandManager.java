@@ -18,7 +18,7 @@ public class CommandManager implements ICommandManager{
 
 	@Override
 	public void draw(Point start, Point end) {
-		Command command = new DrawShapeCommand(AppState, Canvas, start, end);
+		Command command = new NewShapeCommand(AppState, Canvas, start, end);
 		if (command.run()) {
 			CommandHistory.add(command);
 		}
@@ -31,7 +31,7 @@ public class CommandManager implements ICommandManager{
 		int yMove = end.y - start.y;
 		
 		//Shape Commands
-		Command command = new MoveCommand(xMove, yMove, AppState.getShapes(), Canvas);
+		Command command = new MoveCommand(xMove, yMove, AppState, selectedShapes, Canvas);
 		
 		if (command.run()) {
 			CommandHistory.add(command);
@@ -56,7 +56,7 @@ public class CommandManager implements ICommandManager{
 
 	@Override
 	public void delete() {
-		Command command = new DeleteCommand(AppState, Canvas);
+		Command command = new DeleteCommand(AppState, selectedShapes, Canvas);
 		
 		if (command.run()) {
 			CommandHistory.add(command);
@@ -65,12 +65,15 @@ public class CommandManager implements ICommandManager{
 
 	@Override
 	public void select(Point begin, Point end) {
-			new SelectCommand(AppState, Canvas, begin, end).run();
+		//Disconnect selectedShapes from old selections
+		selectedShapes = new ShapeList();
+		
+		new SelectCommand(AppState, selectedShapes, Canvas, begin, end).run();
 	}
 
 	@Override
 	public void group() {
-		Command command = new GroupCommand(AppState, Canvas);
+		Command command = new GroupCommand(selectedShapes, AppState);
 		
 		if (command.run()) {
 			CommandHistory.add(command);
@@ -79,7 +82,7 @@ public class CommandManager implements ICommandManager{
 
 	@Override
 	public void ungroup() {
-		Command command = new UngroupCommand(AppState, Canvas);
+		Command command = new UngroupCommand(selectedShapes, AppState);
 		
 		if (command.run()) {
 			CommandHistory.add(command);

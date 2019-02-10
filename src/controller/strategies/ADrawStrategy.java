@@ -4,7 +4,8 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
-import model.interfaces.Entity;
+
+import model.Shapes.Entity;
 
 public abstract class ADrawStrategy {
 

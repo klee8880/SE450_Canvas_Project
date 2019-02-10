@@ -2,7 +2,8 @@ package controller.strategies;
 
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
-import model.interfaces.Entity;
+
+import model.Shapes.Entity;
 
 public class rectangleDraw extends ADrawStrategy{
 

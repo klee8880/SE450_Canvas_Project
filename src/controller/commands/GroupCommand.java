@@ -3,30 +3,28 @@ package controller.commands;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import model.interfaces.Entity;
+
+import controller.IShapeList;
+import model.Shapes.Entity;
 import model.interfaces.IApplicationState;
 import view.interfaces.PaintCanvasBase;
 
 public class GroupCommand implements Command {
 	
-	protected LinkedList <Entity> shapes;
-	protected LinkedList <Entity> selectShapes;
+	protected IShapeList shapes;
 	protected ArrayList <Integer> oldGroups;
 	protected PaintCanvasBase Canvas;
+	protected IApplicationState appState;
 	
-	public GroupCommand(IApplicationState appState, PaintCanvasBase Canvas) {
+	public GroupCommand(IShapeList shapes, IApplicationState appState) {
 		
-		this.Canvas = Canvas;
-		this.shapes = appState.getShapes();
+		this.shapes = shapes;
 		this.oldGroups = new ArrayList <Integer> ();
-		this.selectShapes = new LinkedList <Entity> ();
+		this.appState = appState;
 		
 		//Pick out selected shapes and record old group numbers
-		for (Entity i: shapes) {
+		for (Entity i: shapes.getShapes()) {
 			oldGroups.add(i.getGroup());
-			if (i.isSelected()) { 
-				selectShapes.add(i);
-			}
 		}
 		
 	}
@@ -34,20 +32,18 @@ public class GroupCommand implements Command {
 	@Override
 	public boolean run() {
 		
-		if (selectShapes.isEmpty()) {return false;}
+		if (shapes.isEmpty()) {return false;}
 		int group = 1;
 		
 		//find next group number
-		for (Entity i: shapes) {
+		for (Entity i: appState.getShapes().getShapes()) {
 			if (group <= i.getGroup()) {
 				group = i.getGroup() + 1;
 			}
 		}
 		
 		//Set group number
-		for (Entity i: selectShapes) {
-			i.setGroup(group);
-		}
+		shapes.groupAll(group);
 		
 		return true;
 	}
@@ -61,7 +57,7 @@ public class GroupCommand implements Command {
 	@Override
 	public void undo() {
 		Iterator<Integer> i = oldGroups.iterator();
-		Iterator<Entity> j = shapes.iterator();
+		Iterator<Entity> j = shapes.getShapes().iterator();
 		
 		while (i.hasNext()) {
 			j.next().setGroup(i.next());

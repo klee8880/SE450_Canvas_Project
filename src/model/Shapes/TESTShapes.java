@@ -6,7 +6,6 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 import model.Point;
-import model.interfaces.Entity;
 import model.persistence.ApplicationState;
 import view.gui.Gui;
 import view.gui.GuiWindow;
@@ -115,41 +114,14 @@ public class TESTShapes {
     
 	@Test
 	public void triangleTest(){
-		
-		ETriangle shape = (ETriangle) ShapeFactory.makeTriangle(appState, new Point(1,1), new Point(7,7));
-		
-		assertEquals("Unexpected Height",6 ,shape.getHeight());
-		assertEquals("Unexpected Width",6 ,shape.getWidth());
-		assertTrue("Unexpeced Starting Point", new Point(1,1).equals(shape.getStartPoint()));
-		
-		int [] xArray = {1,1,7};
-		int [] yArray = {1,7,7};
-		
-		for (int i = 0; i < 3; i++) {
-			assertEquals("Unexpect X point [" + i + "]in triangle", xArray[i], shape.getXArray()[i]);
-			assertEquals("Unexpect Y point [" + i + "]in triangle", yArray[i], shape.getYArray()[i]);
-		}
 	}
 	
 	@Test
 	public void rectangeTest() {
-		
-		ERectangle shape = (ERectangle) ShapeFactory.makeRectangle(appState, new Point(1,1), new Point(7,7));
-		
-		assertEquals("Unexpected Height",6 ,shape.getHeight());
-		assertEquals("Unexpected Width",6 ,shape.getWidth());
-		assertTrue("Unexpeced Starting Point", new Point(1,1).equals(shape.getStartPoint()));
-		
 	}
 	
 	@Test
 	public void ovalTest() {
-		
-		EEllipse shape = (EEllipse) ShapeFactory.makeEllipse(appState, new Point(1,1), new Point(7,7));
-		
-		assertEquals("Unexpected Height",6 ,shape.getHeight());
-		assertEquals("Unexpected Width",6 ,shape.getWidth());
-		assertTrue("Unexpeced Starting Point", new Point(1,1).equals(shape.getStartPoint()));
 	}
 	
 	@Test

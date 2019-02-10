@@ -1,14 +1,17 @@
 package model.interfaces;
 
 import java.util.LinkedList;
+
+import controller.IShapeList;
 import model.ShapeColor;
 import model.ShapeShadingType;
 import model.ShapeType;
 import model.StartAndEndPointMode;
+import model.Shapes.Entity;
 
 public interface IApplicationState {
 	
-	public void setShapes(LinkedList<Entity> shapes);
+	public void setShapes(IShapeList shapes);
 	
 	void setCopyList(LinkedList<Entity> copyList);
 	
@@ -22,7 +25,7 @@ public interface IApplicationState {
 
     void setActiveStartAndEndPointMode();
     
-    LinkedList<Entity> getShapes();
+    IShapeList getShapes();
 
     LinkedList<Entity> getCopyList();
     

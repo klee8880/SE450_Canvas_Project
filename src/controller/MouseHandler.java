@@ -4,10 +4,11 @@ package controller;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingUtilities;
 import javax.swing.event.MouseInputListener;
-import model.interfaces.Entity;
+
 import model.interfaces.IApplicationState;
 import view.interfaces.PaintCanvasBase;
 import model.*;
+import model.Shapes.Entity;
 
 
 public class MouseHandler implements MouseInputListener {
@@ -52,16 +53,6 @@ public class MouseHandler implements MouseInputListener {
 		
 		switch (App.getActiveStartAndEndPointMode()) {
 		case DEBUG:
-			if (SwingUtilities.isRightMouseButton(e)) {
-				System.out.println("DEBUG: Clear Canvas");
-				Canvas.paintImmediately(0, 0, Canvas.getWidth(), Canvas.getHeight());
-			}
-			else if (SwingUtilities.isLeftMouseButton(e)) {
-				System.out.println("DEBUG: Redraw Shapes");
-				for (Entity i : App.getShapes()) {
-					i.draw(Canvas);
-				}
-			}
 			break;
 		case DRAW:
 			Manager.draw(begin, end);

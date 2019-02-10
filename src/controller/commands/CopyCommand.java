@@ -1,13 +1,13 @@
-package controller.commands;
+ package controller.commands;
 
 import java.util.LinkedList;
-
-import model.interfaces.Entity;
+import controller.IShapeList;
+import model.Shapes.Entity;
 import model.interfaces.IApplicationState;
 
 public class CopyCommand implements Command {
 	
-    private LinkedList <Entity> shapes;
+    private IShapeList shapes;
     private LinkedList <Entity> copyList;
 	
 	public CopyCommand (IApplicationState AppState) {
@@ -22,8 +22,8 @@ public class CopyCommand implements Command {
 		copyList.clear();
 		
 		//Get copy of all shapes
-		for (Entity i: shapes) {
-			if (i.isSelected()) { copyList.add(i.clone());}
+		for (Entity i: shapes.getShapes()) {
+			copyList.add(i);
 		}
 		
 		//Shift copy shape points

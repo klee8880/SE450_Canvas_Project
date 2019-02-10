@@ -1,19 +1,20 @@
 package controller.commands;
 
+import controller.strategies.*;
 import model.Point;
 import model.ShapeType;
+import model.Shapes.Entity;
 import model.Shapes.ShapeFactory;
-import model.interfaces.Entity;
 import model.interfaces.IApplicationState;
 import view.interfaces.PaintCanvasBase;
 
-public class DrawShapeCommand implements Command{
+public class NewShapeCommand implements Command{
 	private ShapeType Type;
 	private IApplicationState State;
 	PaintCanvasBase Canvas;
 	Entity newShape;
 	
-	public DrawShapeCommand(IApplicationState state, PaintCanvasBase Canvas, Point begin, Point end) {
+	public NewShapeCommand(IApplicationState state, PaintCanvasBase Canvas, Point begin, Point end) {
 		super();
 		Type = state.getActiveShapeType();
 		State = state;
@@ -41,8 +42,25 @@ public class DrawShapeCommand implements Command{
 		//Add shape to shape list
 		State.getShapes().add(newShape);
 		
+		ADrawStrategy draw;
+		
 		//Draw Shape
-		newShape.draw(Canvas);
+		switch (newShape.getType()) {
+		case ELLIPSE:
+			draw = new circleDraw();
+			break;
+		case RECTANGLE:
+			draw = new rectangleDraw();
+			break;
+		case TRIANGLE:
+			draw = new triangleDraw();
+			break;
+		default:
+			return false;
+		}
+		
+		draw.drawShape(newShape, Canvas.getGraphics2D());
+		
 		return true;
 	}
 	
@@ -60,9 +78,7 @@ public class DrawShapeCommand implements Command{
 		Canvas.paintImmediately(0, 0, Canvas.getWidth(), Canvas.getHeight());
 		
 		//Redraw remaining shapes
-		for (Entity i: State.getShapes()) {
-			i.draw(Canvas);
-		}
+		State.getShapes().drawAll(Canvas);
 		
 	}
 	

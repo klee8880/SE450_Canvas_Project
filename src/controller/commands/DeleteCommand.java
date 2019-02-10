@@ -1,30 +1,30 @@
 package controller.commands;
 
 import java.util.LinkedList;
-import model.interfaces.Entity;
+
+import controller.IShapeList;
+import model.Shapes.Entity;
 import model.interfaces.IApplicationState;
 import view.interfaces.PaintCanvasBase;
 
 public class DeleteCommand implements Command{
 	
-    private LinkedList <Entity> shapes;
-    private LinkedList <Entity> deleteList;
+    private IShapeList shapes;
+    private IShapeList deleteList;
     private LinkedList <Entity> oldList;
 
     private PaintCanvasBase Canvas;
     
-    public DeleteCommand(IApplicationState AppState, PaintCanvasBase Canvas) {
+    public DeleteCommand(IApplicationState AppState, IShapeList selected, PaintCanvasBase Canvas) {
     	
     	this.Canvas = Canvas;
-    	deleteList = new LinkedList <Entity> ();
+    	deleteList = selected;
     	oldList = new LinkedList <Entity> ();
     	
     	shapes = AppState.getShapes();
-    	for (Entity i: shapes) {
+    	for (Entity i: shapes.getShapes()) {
     		//Old list for undo purposes
     		oldList.add(i);
-    		//get list of items to delete
-    		if (i.isSelected()) {deleteList.add(i);}
     	}
     }
 
@@ -33,14 +33,12 @@ public class DeleteCommand implements Command{
 		
 		if (deleteList.isEmpty()) { return false;}
 		
-		for (Entity i: deleteList) {
+		for (Entity i: deleteList.getShapes()) {
 			shapes.remove(i);
 		}
 		
 		Canvas.paintImmediately(0,  0, Canvas.getWidth(), Canvas.getHeight());
-		for (Entity i: shapes) {
-			i.draw(Canvas);
-		}
+		shapes.drawAll(Canvas);
 		
 		return true;
 	}
@@ -59,9 +57,7 @@ public class DeleteCommand implements Command{
 		}
 		
 		Canvas.paintImmediately(0,  0, Canvas.getWidth(), Canvas.getHeight());
-		for (Entity i: shapes) {
-			i.draw(Canvas);
-		}
+		shapes.drawAll(Canvas);
 	}
 
 }

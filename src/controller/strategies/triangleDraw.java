@@ -3,7 +3,7 @@ package controller.strategies;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import model.Point;
-import model.interfaces.Entity;
+import model.Shapes.Entity;
 
 public class triangleDraw extends ADrawStrategy{
 

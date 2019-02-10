@@ -2,7 +2,7 @@ package controller.commands;
 
 import model.Point;
 import model.ShapeType;
-import model.interfaces.Entity;
+import model.Shapes.Entity;
 import model.interfaces.IApplicationState;
 import view.interfaces.PaintCanvasBase;
 

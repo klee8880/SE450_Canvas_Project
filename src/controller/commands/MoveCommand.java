@@ -1,47 +1,38 @@
 package controller.commands;
 
-import java.util.LinkedList;
-import model.interfaces.Entity;
+import controller.IShapeList;
+import model.interfaces.IApplicationState;
 import view.interfaces.PaintCanvasBase;
 
 public class MoveCommand implements Command{
 	
-	private LinkedList <Entity> selected = new LinkedList <Entity> ();
-	private LinkedList <Entity> shapeList;
+	private IShapeList selected;
+	private IShapeList shapeList;
 	private int x;
 	private int y;
 	private PaintCanvasBase Canvas;
 	
-	public MoveCommand(int x, int y, LinkedList <Entity> shapeList, PaintCanvasBase Canvas) {
+	public MoveCommand(int x, int y, IApplicationState appState, IShapeList selected ,PaintCanvasBase Canvas) {
 		
 		this.x = x;
 		this.y = y;
 		this.Canvas = Canvas;
-		this.shapeList = shapeList;
-		
-		//Add all shapes that are selected
-		for (Entity i: shapeList) {
-			if (i.isSelected()) {selected.add(i);}
-		}
-		
+		this.shapeList = appState.getShapes();
+		this.selected = selected;
 	}
 
 	@Override
 	public boolean run() {
 		
-		if (selected.isEmpty()) {return false;}
+		//Check if shapes where selected
+		if (selected.getShapes().isEmpty()) {return false;}
 		
-		//Move shapes
-		for (Entity i: selected) {
-			i.move(x, y);
-		}
+		selected.moveAll(x, y);
 		
 		//Redraw screen and shapes
 		Canvas.paintImmediately(0, 0, Canvas.getWidth(), Canvas.getHeight());
 		
-		for (Entity i: shapeList) {
-			i.draw(Canvas);
-		}
+		shapeList.drawAll(Canvas);
 		
 		return true;
 	}
@@ -54,16 +45,12 @@ public class MoveCommand implements Command{
 
 	@Override
 	public void undo() {
-		for (Entity i: selected) {
-			i.move(-x, -y);
-		}
+		selected.moveAll(-x, -y);
 		
 		//Redraw screen and shapes
 		Canvas.paintImmediately(0, 0, Canvas.getWidth(), Canvas.getHeight());
 		
-		for (Entity i: shapeList) {
-			i.draw(Canvas);
-		}
+		shapeList.drawAll(Canvas);
 	}
 	
 	

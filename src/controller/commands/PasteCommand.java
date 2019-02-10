@@ -2,13 +2,15 @@ package controller.commands;
 
 import java.util.Iterator;
 import java.util.LinkedList;
-import model.interfaces.Entity;
+import controller.IShapeList;
+import controller.strategies.*;
+import model.Shapes.Entity;
 import model.interfaces.IApplicationState;
 import view.interfaces.PaintCanvasBase;
 
 public class PasteCommand implements Command{
 	
-    private LinkedList <Entity> shapes;
+    private IShapeList shapes;
     private LinkedList <Entity> copyList;
     private PaintCanvasBase Canvas;
 	
@@ -26,9 +28,25 @@ public class PasteCommand implements Command{
 	@Override
 	public boolean run() {
 		//Add a copy of shapes from copy list to shapes
+		ADrawStrategy draw;
+		
 		for (Entity i: copyList) {
 			shapes.add(i.clone());
-			i.draw(Canvas);
+			switch (i.getType()) {
+			case ELLIPSE:
+				draw = new circleDraw();
+				break;
+			case RECTANGLE:
+				draw = new rectangleDraw();
+				break;
+			case TRIANGLE:
+				draw = new triangleDraw();
+				break;
+			default:
+				throw new IllegalArgumentException("Unknown shapeType");
+			}
+			
+			draw.drawShape(i, Canvas.getGraphics2D());
 		}
 		
 		return true;
@@ -51,10 +69,7 @@ public class PasteCommand implements Command{
 		
 		Canvas.paintImmediately(0, 0, Canvas.getWidth(), Canvas.getHeight());
 		
-		for (Entity j: shapes) {
-			j.draw(Canvas);
-		}
-		
+		shapes.drawAll(Canvas);
 	}
 
 }

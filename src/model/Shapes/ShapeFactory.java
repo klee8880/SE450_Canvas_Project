@@ -1,17 +1,14 @@
 package model.Shapes;
 
 import model.Point;
-import model.interfaces.Entity;
+import model.ResolveColor;
+import model.ShapeType;
 import model.interfaces.IApplicationState;
 
 public class ShapeFactory {
 
 	public static Entity makeRectangle(IApplicationState AppState, Point begin, Point end) {
 		
-		//Set dimensions
-		int height = Math.abs(begin.y - end.y);
-		int width = Math.abs(begin.x - end.x);
-		
 		Point StartPoint = new Point();
 		
 		if (begin.x > end.x) StartPoint.x = end.x;
@@ -19,15 +16,20 @@ public class ShapeFactory {
 		if (begin.y > end.y) StartPoint.y = end.y;
 		else StartPoint.y = begin.y;
 		
-		return new ERectangle(AppState, StartPoint, height, width);
+		entityBuilder builder = new entityBuilder();
+		
+		builder.dimensionsFromPoints(begin, end)
+		.setType(ShapeType.RECTANGLE)
+		.setStartPoint(StartPoint)
+		.setPrimary(ResolveColor.resolve(AppState.getActivePrimaryColor()))
+		.setSecondary(ResolveColor.resolve(AppState.getActiveSecondaryColor()))
+		.setShading(AppState.getActiveShapeShadingType());
+		
+		return builder.buildEntity();
 	}
 	
 	public static Entity makeEllipse(IApplicationState AppState, Point begin, Point end) {
 		
-		//Set dimensions
-		int height = Math.abs(begin.y - end.y);
-		int width = Math.abs(begin.x - end.x);
-		
 		Point StartPoint = new Point();
 		
 		if (begin.x > end.x) StartPoint.x = end.x;
@@ -35,35 +37,37 @@ public class ShapeFactory {
 		if (begin.y > end.y) StartPoint.y = end.y;
 		else StartPoint.y = begin.y;
 		
-		return new EEllipse(AppState, StartPoint, height, width);
+		entityBuilder builder = new entityBuilder();
+		
+		builder.dimensionsFromPoints(begin, end)
+		.setType(ShapeType.ELLIPSE)
+		.setStartPoint(StartPoint)
+		.setPrimary(ResolveColor.resolve(AppState.getActivePrimaryColor()))
+		.setSecondary(ResolveColor.resolve(AppState.getActiveSecondaryColor()))
+		.setShading(AppState.getActiveShapeShadingType());
+		
+		return builder.buildEntity();
 	}
 	
 	public static Entity makeTriangle(IApplicationState AppState, Point begin, Point end) {
-		
-		//Set dimensions
-		int height = Math.abs(begin.y - end.y);
-		int width = Math.abs(begin.x - end.x);
-		
+	
 		Point StartPoint = new Point();
-		int [] xArray = new int[3];
-		int [] yArray = new int[3];
 		
 		if (begin.x > end.x) StartPoint.x = end.x;
 		else StartPoint.x = begin.x;
 		if (begin.y > end.y) StartPoint.y = end.y;
 		else StartPoint.y = begin.y;
 		
-		//Find points
-		xArray[0] = StartPoint.x;
-		yArray[0] = StartPoint.y;
+		entityBuilder builder = new entityBuilder();
 		
-		xArray[1] = StartPoint.x;
-		yArray[1] = StartPoint.y + height;
+		builder.dimensionsFromPoints(begin, end)
+		.setType(ShapeType.TRIANGLE)
+		.setStartPoint(StartPoint)
+		.setPrimary(ResolveColor.resolve(AppState.getActivePrimaryColor()))
+		.setSecondary(ResolveColor.resolve(AppState.getActiveSecondaryColor()))
+		.setShading(AppState.getActiveShapeShadingType());
 		
-		xArray[2] = StartPoint.x + width;
-		yArray[2] = StartPoint.y + height;
-		
-		return new ETriangle(AppState, xArray, yArray, height, width);
+		return builder.buildEntity();
 	}
 	
 }

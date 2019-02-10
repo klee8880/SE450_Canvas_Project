@@ -7,16 +7,39 @@ import controller.strategies.ADrawStrategy;
 import controller.strategies.circleDraw;
 import controller.strategies.rectangleDraw;
 import controller.strategies.triangleDraw;
-import model.interfaces.Entity;
+import model.Shapes.Entity;
 import view.interfaces.PaintCanvasBase;
 
-class ShapeList implements IShapeList {
+public class ShapeList implements IShapeList {
 
 	private LinkedList <Entity> shapes = new LinkedList <Entity> ();
 
 	@Override
 	public void add(Entity newShape) {
-		shapes.add(newShape);
+		
+		if (!shapes.contains(newShape)) {
+			shapes.add(newShape);
+		}
+	}
+	
+	@Override
+	public void removeLast() {
+		shapes.removeLast();
+	}
+	
+	@Override
+	public void remove(Entity e) {
+		shapes.remove(e);
+	}
+	
+	@Override
+	public void clear() {
+		shapes.clear();
+	}
+	
+	@Override
+	public boolean isEmpty() {
+		return shapes.isEmpty();
 	}
 
 	@Override
@@ -54,6 +77,16 @@ class ShapeList implements IShapeList {
 		}
 		
 	}
+	
+	@Override
+	public void groupAll(int g) {
+		for (Entity e: shapes) {e.setGroup(g);}
+	}
+	
+	@Override
+	public void unGroupAll() {
+		
+	}
 
 	@Override
 	public void clearObservers() {
@@ -71,6 +104,16 @@ class ShapeList implements IShapeList {
 		
 		return newList;
 		
+	}
+
+	@Override
+	public LinkedList <Entity> getShapes() {
+		
+		LinkedList <Entity> newList = new LinkedList <Entity> ();
+		
+		for (Entity e: shapes) newList.add(e);
+		
+		return newList;
 	}
 	
 	

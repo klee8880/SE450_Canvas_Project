@@ -4,13 +4,16 @@ import model.ShapeColor;
 import model.ShapeShadingType;
 import model.ShapeType;
 import model.StartAndEndPointMode;
+import model.Shapes.Entity;
 import model.dialogs.DialogProvider;
-import model.interfaces.Entity;
 import model.interfaces.IApplicationState;
 import model.interfaces.IDialogProvider;
 import view.interfaces.IUiModule;
 import java.io.Serializable;
 import java.util.LinkedList;
+
+import controller.IShapeList;
+import controller.ShapeList;
 
 public class ApplicationState implements IApplicationState, Serializable {
     private static final long serialVersionUID = -5545483996576839008L;
@@ -24,11 +27,11 @@ public class ApplicationState implements IApplicationState, Serializable {
     private StartAndEndPointMode activeStartAndEndPointMode;
     
     //List of all shapes in application
-    private LinkedList <Entity> Shapes;
+    private IShapeList Shapes;
     private LinkedList <Entity> copyList;
 
     public ApplicationState(IUiModule uiModule) {
-    	Shapes = new LinkedList<Entity>();
+    	Shapes = new ShapeList();
     	copyList = new LinkedList<Entity>();
         this.uiModule = uiModule;
         this.dialogProvider = new DialogProvider(this);
@@ -36,12 +39,12 @@ public class ApplicationState implements IApplicationState, Serializable {
     }
     
     @Override
-    public LinkedList<Entity> getShapes() {
+    public IShapeList getShapes() {
 		return Shapes;
 	}
     
     @Override
-	public void setShapes(LinkedList<Entity> shapes) {
+	public void setShapes(IShapeList shapes) {
 		Shapes = shapes;
 	}
 
