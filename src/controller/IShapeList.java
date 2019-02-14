@@ -20,6 +20,8 @@ public interface IShapeList {
 	
 	public void drawAll(PaintCanvasBase Canvas);
 	
+	public void selectDrawAll(PaintCanvasBase Canvas);
+	
 	public void moveAll(int x, int y);
 	
 	public void groupAll(int g);

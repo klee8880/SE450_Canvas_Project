@@ -69,6 +69,7 @@ public class CommandManager implements ICommandManager{
 		selectedShapes = new ShapeList();
 		
 		new SelectCommand(AppState, selectedShapes, Canvas, begin, end).run();
+		
 	}
 
 	@Override
@@ -97,6 +98,12 @@ public class CommandManager implements ICommandManager{
 	@Override
 	public void undo() {
 		CommandHistory.undo();
+	}
+	
+	public void refreshShapes() {
+		Canvas.paintImmediately(0, 0, Canvas.getWidth(), Canvas.getHeight());
+		AppState.getShapes().drawAll(Canvas);
+		selectedShapes.selectDrawAll(Canvas);
 	}
 
 }

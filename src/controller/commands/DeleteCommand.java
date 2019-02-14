@@ -37,7 +37,7 @@ public class DeleteCommand implements Command{
 			shapes.remove(i);
 		}
 		
-		Canvas.paintImmediately(0,  0, Canvas.getWidth(), Canvas.getHeight());
+		Canvas.paintImmediately(0, 0, Canvas.getWidth(), Canvas.getHeight());
 		shapes.drawAll(Canvas);
 		
 		return true;

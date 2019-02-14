@@ -68,6 +68,16 @@ public class ShapeList implements IShapeList {
 		}
 		
 	}
+	
+	@Override
+	public void selectDrawAll(PaintCanvasBase Canvas) {
+		ADrawStrategy draw = new circleDraw();
+		Graphics2D graphic = Canvas.getGraphics2D();
+		
+		for (Entity e: shapes) {
+			draw.selectDraw(e, graphic);
+		}
+	}
 
 	@Override
 	public void moveAll(int x, int y) {

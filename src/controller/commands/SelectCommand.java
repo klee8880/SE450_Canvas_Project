@@ -1,6 +1,4 @@
 package controller.commands;
-import java.util.LinkedList;
-
 import controller.IShapeList;
 import model.Point;
 import model.Shapes.Entity;
@@ -52,13 +50,17 @@ public class SelectCommand implements Command{
 				}
 			}				
 		}
-		
-		//redraw canvas
-		Canvas.paintImmediately(0, 0, Canvas.getWidth(), Canvas.getHeight());
-		
-		Shapes.drawAll(Canvas);
-		
-		return true;
+		if (selected.isEmpty()) {
+			return false;
+		}
+		else {
+			
+			Canvas.paintImmediately(0, 0, Canvas.getWidth(), Canvas.getHeight());
+			Shapes.drawAll(Canvas);
+			selected.selectDrawAll(Canvas);
+			
+			return true;
+		}
 	}
 
 	@Override
