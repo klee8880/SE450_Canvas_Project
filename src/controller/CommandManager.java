@@ -41,7 +41,7 @@ public class CommandManager implements ICommandManager{
 
 	@Override
 	public void copy() {
-		new CopyCommand(AppState).run();
+		new CopyCommand(AppState, selectedShapes).run();
 	}
 
 	@Override
