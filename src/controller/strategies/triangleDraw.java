@@ -1,7 +1,10 @@
 package controller.strategies;
 
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Stroke;
+
 import model.Point;
 import model.Shapes.Entity;
 
@@ -56,6 +59,28 @@ public class triangleDraw extends ADrawStrategy{
 		default:
 			throw new IllegalArgumentException("Unexpected fillType encountered when drawing shape");
 		}
+		
+	}
+
+	@Override
+	public void selectDraw(Entity shape, Graphics2D graphic) {
+		Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
+		graphic.setStroke(stroke);
+	    graphic.setColor(Color.BLACK);
+	    
+	    int [] xArray = new int [3];
+	    int [] yArray = new int [3];
+	    
+	    xArray[0] = shape.getStartPoint().x - 5;
+	    yArray[0] = shape.getStartPoint().y - 5;
+	    
+	    xArray[1] = xArray[0];
+	    yArray[1] = yArray[0] + shape.getHeight() + 5;
+	    
+	    xArray[2] = xArray[1] + shape.getWidth() + 5;
+	    yArray[2] = yArray[1];
+	    
+	    graphic.drawPolygon(xArray, yArray, 3);
 		
 	}
 

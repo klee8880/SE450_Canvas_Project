@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.Graphics2D;
 import java.util.LinkedList;
-
 import controller.strategies.ADrawStrategy;
 import controller.strategies.circleDraw;
 import controller.strategies.rectangleDraw;
@@ -71,10 +70,25 @@ public class ShapeList implements IShapeList {
 	
 	@Override
 	public void selectDrawAll(PaintCanvasBase Canvas) {
-		ADrawStrategy draw = new circleDraw();
+		ADrawStrategy draw = null;
 		Graphics2D graphic = Canvas.getGraphics2D();
 		
 		for (Entity e: shapes) {
+			switch(e.getType()) {
+			case ELLIPSE:
+				draw = new circleDraw();
+				break;
+			case RECTANGLE:
+				draw = new rectangleDraw();
+				break;
+			case TRIANGLE:
+				draw = new triangleDraw();
+				break;
+			default:
+				throw new IllegalArgumentException("Unexpected shape type");
+			
+			}
+			
 			draw.selectDraw(e, graphic);
 		}
 	}
