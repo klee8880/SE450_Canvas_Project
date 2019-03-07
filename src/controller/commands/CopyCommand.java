@@ -33,7 +33,7 @@ public class CopyCommand implements Command {
 		
 		return true;
 	}
-
+ 
 	@Override
 	public void redo() {
 		
