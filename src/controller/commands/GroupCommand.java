@@ -2,8 +2,6 @@ package controller.commands;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
-
 import controller.IShapeList;
 import model.Shapes.Entity;
 import model.interfaces.IApplicationState;
