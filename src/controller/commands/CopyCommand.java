@@ -26,11 +26,6 @@ public class CopyCommand implements Command {
 			copyList.add(i.clone());
 		}
 		
-		//Shift copy shape points
-		for (Entity i: copyList) {
-			i.move(-20, -20);
-		}
-		
 		return true;
 	}
  

@@ -30,6 +30,11 @@ public class PasteCommand implements Command{
 		//Add a copy of shapes from copy list to shapes
 		ADrawStrategy draw;
 		
+		//Shift copy shape points
+		for (Entity i: copyList) {
+			i.move(-20, -20);
+		}
+		
 		for (Entity i: copyList) {
 			shapes.add(i.clone());
 			switch (i.getType()) {
