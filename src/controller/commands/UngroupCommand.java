@@ -1,10 +1,7 @@
 package controller.commands;
 
 import controller.IShapeList;
-import model.Shapes.Entity;
 import model.interfaces.IApplicationState;
-import view.interfaces.PaintCanvasBase;
-
 public class UngroupCommand extends GroupCommand{
 
 	public UngroupCommand(IShapeList shapes, IApplicationState appState) {
