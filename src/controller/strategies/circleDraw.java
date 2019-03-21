@@ -7,7 +7,7 @@ import java.awt.Stroke;
 
 import model.Shapes.Entity;
 
-public class circleDraw extends ADrawStrategy {
+public class circleDraw implements ADrawStrategy {
 
 	@Override
 	public void drawShape(Entity shape, Graphics2D graphic) {

@@ -8,7 +8,7 @@ import java.awt.Stroke;
 import model.Point;
 import model.Shapes.Entity;
 
-public class triangleDraw extends ADrawStrategy{
+public class triangleDraw implements ADrawStrategy{
 
 	@Override
 	public void drawShape(Entity shape, Graphics2D graphic) {
