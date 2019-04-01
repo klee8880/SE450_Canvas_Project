@@ -2,7 +2,7 @@ package controller.commands;
 
 import model.Point;
 import model.ShapeType;
-import model.Shapes.Entity;
+import model.Shapes.Shape;
 import model.interfaces.IApplicationState;
 import view.interfaces.PaintCanvasBase;
 
@@ -17,11 +17,11 @@ public class CommandFactory {
 		return null;	
 	}
 	
-	public static Command makePasteCommand(Point target, IApplicationState App, Entity Shape, PaintCanvasBase Canvas) {
+	public static Command makePasteCommand(Point target, IApplicationState App, Shape Shape, PaintCanvasBase Canvas) {
 		return null;
 	}
 	
-	public static Command makeDeleteCommand(Entity thisShape, IApplicationState App, PaintCanvasBase Canvas) {
+	public static Command makeDeleteCommand(Shape thisShape, IApplicationState App, PaintCanvasBase Canvas) {
 		return null;	
 	}
 	

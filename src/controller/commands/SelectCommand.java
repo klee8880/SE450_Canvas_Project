@@ -1,7 +1,7 @@
 package controller.commands;
 import controller.IShapeList;
 import model.Point;
-import model.Shapes.Entity;
+import model.Shapes.Shape;
 import model.interfaces.IApplicationState;
 import view.interfaces.PaintCanvasBase;
 
@@ -37,7 +37,7 @@ public class SelectCommand implements Command{
 	public boolean run() {
 		
 		//mark select on all shapes that intersect the bounding box.
-		for (Entity i : Shapes.getShapes()) {
+		for (Shape i : Shapes.getShapes()) {
 			
 			//mark new selections
 			Point [] shapeBoundary = getBoundary(i.getStartPoint(), i.getHeight(), i.getWidth());
@@ -141,7 +141,7 @@ public class SelectCommand implements Command{
 	}
 	
 	private void selectGroup (int groupNum) {
-		for (Entity i: Shapes.getShapes()) {
+		for (Shape i: Shapes.getShapes()) {
 			if (i.getGroup() == groupNum) {
 				selected.add(i);
 			}

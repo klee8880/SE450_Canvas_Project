@@ -7,7 +7,7 @@ import model.interfaces.IApplicationState;
 
 public class ShapeFactory {
 
-	public static Entity makeRectangle(IApplicationState AppState, Point begin, Point end) {
+	public static Shape makeRectangle(IApplicationState AppState, Point begin, Point end) {
 		
 		Point StartPoint = new Point();
 		
@@ -28,7 +28,7 @@ public class ShapeFactory {
 		return builder.buildEntity();
 	}
 	
-	public static Entity makeEllipse(IApplicationState AppState, Point begin, Point end) {
+	public static Shape makeEllipse(IApplicationState AppState, Point begin, Point end) {
 		
 		Point StartPoint = new Point();
 		
@@ -49,7 +49,7 @@ public class ShapeFactory {
 		return builder.buildEntity();
 	}
 	
-	public static Entity makeTriangle(IApplicationState AppState, Point begin, Point end) {
+	public static Shape makeTriangle(IApplicationState AppState, Point begin, Point end) {
 	
 		Point StartPoint = new Point();
 		

@@ -51,9 +51,9 @@ class entityBuilder {
 		return this;
 	}
 	
-	public Entity buildEntity () {
+	public Shape buildEntity () {
 		
-		return new Entity(
+		return new Shape(
 				type, shading, primary, secondary, StartPoint, height, width);
 	}
 	

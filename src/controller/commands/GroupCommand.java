@@ -3,7 +3,7 @@ package controller.commands;
 import java.util.ArrayList;
 import java.util.Iterator;
 import controller.IShapeList;
-import model.Shapes.Entity;
+import model.Shapes.Shape;
 import model.interfaces.IApplicationState;
 import view.interfaces.PaintCanvasBase;
 
@@ -21,7 +21,7 @@ public class GroupCommand implements Command {
 		this.appState = appState;
 		
 		//Pick out selected shapes and record old group numbers
-		for (Entity i: shapes.getShapes()) {
+		for (Shape i: shapes.getShapes()) {
 			oldGroups.add(i.getGroup());
 		}
 		
@@ -34,7 +34,7 @@ public class GroupCommand implements Command {
 		int group = 1;
 		
 		//find next group number
-		for (Entity i: appState.getShapes().getShapes()) {
+		for (Shape i: appState.getShapes().getShapes()) {
 			if (group <= i.getGroup()) {
 				group = i.getGroup() + 1;
 			}
@@ -55,7 +55,7 @@ public class GroupCommand implements Command {
 	@Override
 	public void undo() {
 		Iterator<Integer> i = oldGroups.iterator();
-		Iterator<Entity> j = shapes.getShapes().iterator();
+		Iterator<Shape> j = shapes.getShapes().iterator();
 		
 		while (i.hasNext()) {
 			j.next().setGroup(i.next());

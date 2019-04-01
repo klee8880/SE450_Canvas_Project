@@ -4,7 +4,7 @@ import model.ShapeColor;
 import model.ShapeShadingType;
 import model.ShapeType;
 import model.StartAndEndPointMode;
-import model.Shapes.Entity;
+import model.Shapes.Shape;
 import model.dialogs.DialogProvider;
 import model.interfaces.IApplicationState;
 import model.interfaces.IDialogProvider;
@@ -28,11 +28,11 @@ public class ApplicationState implements IApplicationState, Serializable {
     
     //List of all shapes in application
     private IShapeList Shapes;
-    private LinkedList <Entity> copyList;
+    private LinkedList <Shape> copyList;
 
     public ApplicationState(IUiModule uiModule) {
     	Shapes = new ShapeList();
-    	copyList = new LinkedList<Entity>();
+    	copyList = new LinkedList<Shape>();
         this.uiModule = uiModule;
         this.dialogProvider = new DialogProvider(this);
         setDefaults();
@@ -49,12 +49,12 @@ public class ApplicationState implements IApplicationState, Serializable {
 	}
 
     @Override
-	public LinkedList<Entity> getCopyList() {
+	public LinkedList<Shape> getCopyList() {
 		return copyList;
 	}
 
     @Override
-	public void setCopyList(LinkedList<Entity> copyList) {
+	public void setCopyList(LinkedList<Shape> copyList) {
 		this.copyList = copyList;
 	}
 

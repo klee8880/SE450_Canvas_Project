@@ -3,7 +3,7 @@ package controller.commands;
 import java.util.LinkedList;
 
 import controller.IShapeList;
-import model.Shapes.Entity;
+import model.Shapes.Shape;
 import model.interfaces.IApplicationState;
 import view.interfaces.PaintCanvasBase;
 
@@ -11,7 +11,7 @@ public class DeleteCommand implements Command{
 	
     private IShapeList shapes;
     private IShapeList deleteList;
-    private LinkedList <Entity> oldList;
+    private LinkedList <Shape> oldList;
 
     private PaintCanvasBase Canvas;
     
@@ -19,10 +19,10 @@ public class DeleteCommand implements Command{
     	
     	this.Canvas = Canvas;
     	deleteList = selected;
-    	oldList = new LinkedList <Entity> ();
+    	oldList = new LinkedList <Shape> ();
     	
     	shapes = AppState.getShapes();
-    	for (Entity i: shapes.getShapes()) {
+    	for (Shape i: shapes.getShapes()) {
     		//Old list for undo purposes
     		oldList.add(i);
     	}
@@ -33,7 +33,7 @@ public class DeleteCommand implements Command{
 		
 		if (deleteList.isEmpty()) { return false;}
 		
-		for (Entity i: deleteList.getShapes()) {
+		for (Shape i: deleteList.getShapes()) {
 			shapes.remove(i);
 		}
 		
@@ -52,7 +52,7 @@ public class DeleteCommand implements Command{
 	public void undo() {
 		//Reset list to before delete
 		shapes.clear();
-		for (Entity i: oldList) {
+		for (Shape i: oldList) {
 			shapes.add(i);
 		}
 		

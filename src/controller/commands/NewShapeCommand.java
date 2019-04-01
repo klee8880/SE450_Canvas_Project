@@ -3,7 +3,7 @@ package controller.commands;
 import controller.strategies.*;
 import model.Point;
 import model.ShapeType;
-import model.Shapes.Entity;
+import model.Shapes.Shape;
 import model.Shapes.ShapeFactory;
 import model.interfaces.IApplicationState;
 import view.interfaces.PaintCanvasBase;
@@ -12,7 +12,7 @@ public class NewShapeCommand implements Command{
 	private ShapeType Type;
 	private IApplicationState State;
 	PaintCanvasBase Canvas;
-	Entity newShape;
+	Shape newShape;
 	
 	public NewShapeCommand(IApplicationState state, PaintCanvasBase Canvas, Point begin, Point end) {
 		super();

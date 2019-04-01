@@ -2,17 +2,17 @@ package controller;
 
 import java.util.LinkedList;
 
-import model.Shapes.Entity;
+import model.Shapes.Shape;
 import view.interfaces.PaintCanvasBase;
 
 //Observer-Subject Build Pattern Object
 public interface IShapeList {
 
-	public void add(Entity shape);
+	public void add(Shape shape);
 	
 	public void removeLast();
 	
-	public void remove(Entity e);
+	public void remove(Shape e);
 	
 	public void clear();
 	
@@ -30,7 +30,7 @@ public interface IShapeList {
 	
 	public void clearObservers();
 	
-	public LinkedList <Entity> getShapes();
+	public LinkedList <Shape> getShapes();
 	
 	public IShapeList clone();
 	

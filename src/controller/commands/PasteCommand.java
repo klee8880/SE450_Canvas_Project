@@ -4,21 +4,21 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import controller.IShapeList;
 import controller.strategies.*;
-import model.Shapes.Entity;
+import model.Shapes.Shape;
 import model.interfaces.IApplicationState;
 import view.interfaces.PaintCanvasBase;
 
 public class PasteCommand implements Command{
 	
     private IShapeList shapes;
-    private LinkedList <Entity> copyList;
+    private LinkedList <Shape> copyList;
     private PaintCanvasBase Canvas;
 	
 	public PasteCommand (IApplicationState AppState, PaintCanvasBase Canvas) {
 		this.shapes = AppState.getShapes();
-		this.copyList = new LinkedList <Entity> ();
+		this.copyList = new LinkedList <Shape> ();
 		
-		for (Entity i: AppState.getCopyList()) {
+		for (Shape i: AppState.getCopyList()) {
 			copyList.add(i.clone());
 		}
 		
@@ -31,11 +31,11 @@ public class PasteCommand implements Command{
 		ADrawStrategy draw;
 		
 		//Shift copy shape points
-		for (Entity i: copyList) {
+		for (Shape i: copyList) {
 			i.move(-20, -20);
 		}
 		
-		for (Entity i: copyList) {
+		for (Shape i: copyList) {
 			shapes.add(i.clone());
 			switch (i.getType()) {
 			case ELLIPSE:
@@ -65,7 +65,7 @@ public class PasteCommand implements Command{
 	@Override
 	public void undo() {
 
-		Iterator<Entity> i = copyList.iterator();
+		Iterator<Shape> i = copyList.iterator();
 		
 		while (i.hasNext()) {
 			shapes.removeLast();

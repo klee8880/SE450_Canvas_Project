@@ -7,13 +7,13 @@ import model.ShapeColor;
 import model.ShapeShadingType;
 import model.ShapeType;
 import model.StartAndEndPointMode;
-import model.Shapes.Entity;
+import model.Shapes.Shape;
 
 public interface IApplicationState {
 	
 	public void setShapes(IShapeList shapes);
 	
-	void setCopyList(LinkedList<Entity> copyList);
+	void setCopyList(LinkedList<Shape> copyList);
 	
     void setActiveShape();
 
@@ -27,7 +27,7 @@ public interface IApplicationState {
     
     IShapeList getShapes();
 
-    LinkedList<Entity> getCopyList();
+    LinkedList<Shape> getCopyList();
     
     ShapeType getActiveShapeType();
 

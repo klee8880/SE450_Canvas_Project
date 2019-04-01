@@ -6,15 +6,15 @@ import controller.strategies.ADrawStrategy;
 import controller.strategies.circleDraw;
 import controller.strategies.rectangleDraw;
 import controller.strategies.triangleDraw;
-import model.Shapes.Entity;
+import model.Shapes.Shape;
 import view.interfaces.PaintCanvasBase;
 
 public class ShapeList implements IShapeList {
 
-	private LinkedList <Entity> shapes = new LinkedList <Entity> ();
+	private LinkedList <Shape> shapes = new LinkedList <Shape> ();
 
 	@Override
-	public void add(Entity newShape) {
+	public void add(Shape newShape) {
 		
 		if (!shapes.contains(newShape)) {
 			shapes.add(newShape);
@@ -27,7 +27,7 @@ public class ShapeList implements IShapeList {
 	}
 	
 	@Override
-	public void remove(Entity e) {
+	public void remove(Shape e) {
 		shapes.remove(e);
 	}
 	
@@ -47,7 +47,7 @@ public class ShapeList implements IShapeList {
 		ADrawStrategy draw;
 		Graphics2D graphic = Canvas.getGraphics2D();
 		
-		for (Entity e: shapes) {
+		for (Shape e: shapes) {
 			switch(e.getType()) {
 			case ELLIPSE:
 				draw = new circleDraw();
@@ -73,7 +73,7 @@ public class ShapeList implements IShapeList {
 		ADrawStrategy draw = null;
 		Graphics2D graphic = Canvas.getGraphics2D();
 		
-		for (Entity e: shapes) {
+		for (Shape e: shapes) {
 			switch(e.getType()) {
 			case ELLIPSE:
 				draw = new circleDraw();
@@ -96,7 +96,7 @@ public class ShapeList implements IShapeList {
 	@Override
 	public void moveAll(int x, int y) {
 
-		for (Entity s: shapes) {
+		for (Shape s: shapes) {
 			s.move(x, y);
 		}
 		
@@ -104,7 +104,7 @@ public class ShapeList implements IShapeList {
 	
 	@Override
 	public void groupAll(int g) {
-		for (Entity e: shapes) {e.setGroup(g);}
+		for (Shape e: shapes) {e.setGroup(g);}
 	}
 	
 	@Override
@@ -122,7 +122,7 @@ public class ShapeList implements IShapeList {
 		
 		ShapeList newList= new ShapeList();
 		
-		for (Entity e: this.shapes) {
+		for (Shape e: this.shapes) {
 			newList.add(e);
 		}
 		
@@ -131,11 +131,11 @@ public class ShapeList implements IShapeList {
 	}
 
 	@Override
-	public LinkedList <Entity> getShapes() {
+	public LinkedList <Shape> getShapes() {
 		
-		LinkedList <Entity> newList = new LinkedList <Entity> ();
+		LinkedList <Shape> newList = new LinkedList <Shape> ();
 		
-		for (Entity e: shapes) newList.add(e);
+		for (Shape e: shapes) newList.add(e);
 		
 		return newList;
 	}

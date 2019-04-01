@@ -23,10 +23,10 @@ public class TESTShapes {
 
     @Test
 	public void moveTriangle() {
-		Entity shape1 = ShapeFactory.makeTriangle(appState, new Point(4,4), new Point(10,10));
-		Entity shape2 = ShapeFactory.makeTriangle(appState, new Point(4,4), new Point(10,10));
-		Entity shape3 = ShapeFactory.makeTriangle(appState, new Point(4,4), new Point(10,10));
-		Entity shape4 = ShapeFactory.makeTriangle(appState, new Point(4,4), new Point(10,10));
+		Shape shape1 = ShapeFactory.makeTriangle(appState, new Point(4,4), new Point(10,10));
+		Shape shape2 = ShapeFactory.makeTriangle(appState, new Point(4,4), new Point(10,10));
+		Shape shape3 = ShapeFactory.makeTriangle(appState, new Point(4,4), new Point(10,10));
+		Shape shape4 = ShapeFactory.makeTriangle(appState, new Point(4,4), new Point(10,10));
 		
 		shape1.move(-3, 0);
 		shape2.move(3, 0);
@@ -54,10 +54,10 @@ public class TESTShapes {
     
     @Test
 	public void moveRectangle() {
-		Entity shape1 = ShapeFactory.makeRectangle(appState, new Point(4,4), new Point(10,10));
-		Entity shape2 = ShapeFactory.makeRectangle(appState, new Point(4,4), new Point(10,10));
-		Entity shape3 = ShapeFactory.makeRectangle(appState, new Point(4,4), new Point(10,10));
-		Entity shape4 = ShapeFactory.makeRectangle(appState, new Point(4,4), new Point(10,10));
+		Shape shape1 = ShapeFactory.makeRectangle(appState, new Point(4,4), new Point(10,10));
+		Shape shape2 = ShapeFactory.makeRectangle(appState, new Point(4,4), new Point(10,10));
+		Shape shape3 = ShapeFactory.makeRectangle(appState, new Point(4,4), new Point(10,10));
+		Shape shape4 = ShapeFactory.makeRectangle(appState, new Point(4,4), new Point(10,10));
 		
 		shape1.move(-3, 0);
 		shape2.move(3, 0);
@@ -84,10 +84,10 @@ public class TESTShapes {
     
     @Test
 	public void moveOval() {
-		Entity shape1 = ShapeFactory.makeEllipse(appState, new Point(4,4), new Point(10,10));
-		Entity shape2 = ShapeFactory.makeEllipse(appState, new Point(4,4), new Point(10,10));
-		Entity shape3 = ShapeFactory.makeEllipse(appState, new Point(4,4), new Point(10,10));
-		Entity shape4 = ShapeFactory.makeEllipse(appState, new Point(4,4), new Point(10,10));
+		Shape shape1 = ShapeFactory.makeEllipse(appState, new Point(4,4), new Point(10,10));
+		Shape shape2 = ShapeFactory.makeEllipse(appState, new Point(4,4), new Point(10,10));
+		Shape shape3 = ShapeFactory.makeEllipse(appState, new Point(4,4), new Point(10,10));
+		Shape shape4 = ShapeFactory.makeEllipse(appState, new Point(4,4), new Point(10,10));
 		
 		shape1.move(-3, 0);
 		shape2.move(3, 0);
@@ -127,9 +127,9 @@ public class TESTShapes {
 	@Test
 	public void shapeFactoryFunctional() {
 		
-		Entity shape1 = null;
-		Entity shape2 = null;
-		Entity shape3 = null;
+		Shape shape1 = null;
+		Shape shape2 = null;
+		Shape shape3 = null;
 
 		shape1 = ShapeFactory.makeTriangle(appState,  new Point(1,1), new Point(7,7));
 		shape2 = ShapeFactory.makeRectangle(appState,  new Point(1,1), new Point(7,7));
